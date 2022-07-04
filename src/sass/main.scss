@@ -1,0 +1,94 @@
+@import './common';
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(67, 65, 226, 0.863);
+    &__input {
+        border-style: none;
+        outline: none;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        padding: 5px;
+    }
+    &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-style: none;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 4px;
+    }
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * 30px);
+  margin-left: calc(-1 * 30px);
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-basis: calc(100% / 4 - 30px);
+  padding: 5px;
+  margin-top: 30px;
+  margin-left: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      &:hover {
+    transform: scale(1.03);
+  }
+}
+
+.info {
+  display: flex;
+  margin-top: 10px;
+  &-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    & b {
+      margin-bottom: 10px;
+    }
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
