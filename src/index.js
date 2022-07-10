@@ -10,6 +10,7 @@ import { refs } from './js/refs';
 let page = 1;
 let inputValue = '';
 let totalHits = 0;
+let notificationBtn = 0;
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captions: true,
@@ -20,6 +21,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 refs.formEl.addEventListener('submit', onClickSearch);
 
 async function onClickSearch(e) {
+  notificationBtn = 0
   e.preventDefault();
   const {
     elements: { searchQuery },
@@ -29,7 +31,8 @@ async function onClickSearch(e) {
 
   totalHits = photo.totalHits;
 
-  if (photo.hits.length === 0) {
+  if (searchQuery.value === '') {
+    renderClear(refs.galleryEl)
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.',
     );
@@ -47,9 +50,13 @@ async function searchPhoto(value) {
   const res = await requestToServer(value);
   return res.data;
 }
-
 async function loadMore() {
+
   if (refs.galleryEl.children.length >= totalHits) {
+    if(notificationBtn === 1){
+      return;
+    }
+    notificationBtn = 1;
     return Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
   }
   page += 1;
@@ -59,6 +66,18 @@ async function loadMore() {
 
   lightbox.refresh();
 }
+
+// async function loadMore() {
+//   if (refs.galleryEl.children.length >= totalHits) {
+//     return Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+//   }
+//   page += 1;
+//   const photo = await requestToServer(inputValue, page);
+
+//   renderHtml(photo.data.hits);
+
+//   lightbox.refresh();
+// }
 
 window.addEventListener('scroll', () => {
   let contentHeight = document.body.offsetHeight;
