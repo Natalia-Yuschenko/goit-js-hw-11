@@ -31,7 +31,7 @@ async function onClickSearch(e) {
 
   totalHits = photo.totalHits;
 
-  if (searchQuery.value === '') {
+  if (searchQuery.value.trim() === '') {
     renderClear(refs.galleryEl)
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.',
